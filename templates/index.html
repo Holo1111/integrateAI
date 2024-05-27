@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document QA</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/4/4b/Memorial_University_of_Newfoundland_seal.svg/1200px-Memorial_University_of_Newfoundland_seal.svg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+        }
+        .container {
+            margin-top: 50px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .card {
+            margin-top: 20px;
+        }
+        .card-header, .card-footer {
+            background-color: #343a40;
+            color: white;
+        }
+        .card-body {
+            background-color: white;
+            color: black;
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #343a40;
+        }
+        .btn-primary {
+            background-color: #343a40;
+            border-color: #343a40;
+        }
+        .btn-primary:hover {
+            background-color: #495057;
+            border-color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Ask Questions Based on the Document</h2>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="company-id-input">Company ID:</label>
+                    <input type="text" class="form-control" id="company-id-input" placeholder="Enter your company ID">
+                </div>
+                <div class="form-group">
+                    <label for="question-input">Ask a Question:</label>
+                    <input type="text" class="form-control" id="question-input" placeholder="Type your question here">
+                </div>
+                <button id="ask-button" class="btn btn-primary btn-block">Ask</button>
+            </div>
+            <div class="card-footer">
+                <h3>Answer:</h3>
+                <p id="answer"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('ask-button').addEventListener('click', async () => {
+            const companyId = document.getElementById('company-id-input').value;
+            const question = document.getElementById('question-input').value;
+            const response = await fetch('/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ company_id: companyId, question: question })
+            });
+            const data = await response.json();
+            document.getElementById('answer').textContent = data.answer;
+        });
+    </script>
+</body>
+</html>
