@@ -86,7 +86,7 @@
                 body: JSON.stringify({ company_id: companyId, question: question })
             });
             const data = await response.json();
-            document.getElementById('answer').textContent = data.answer;
+            document.getElementById('answer').textContent = data.answer || data.error;
         });
     </script>
 </body>

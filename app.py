@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.DEBUG)
 # Function to read the content of the file based on the company identifier
 def read_text_file(company_id, file_name):
     """Read the contents of a text file with UTF-8 encoding."""
-    file_path = f'companies/{company_id}/{file_name}'
+    file_path = f'static/companies/{company_id}/{file_name}'
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as file:
             return file.read()
