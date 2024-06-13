@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify, render_template
 import openai
 import logging
 from flask_caching import Cache
+import openai.version
 
 
 
