@@ -4,8 +4,9 @@ import openai
 import logging
 from flask_caching import Cache
 import openai.version
+from dotenv import load_dotenv
 
-
+load_dotenv()
 
 app = Flask(__name__)
 
